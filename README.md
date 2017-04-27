@@ -3,12 +3,12 @@ An application that checks the CPU Usage and Battery status
 - and then notifies the user via an email.
 
 # Installation
-#####Prerequisites
+#### Prerequisites
   - A GMAIL account that will be used to send emails
   OR
   - A PushJet Service (need the "secret")
 
-#####Install
+#### Install
   - Add the Email address that will receive the emails and the Gmail account's Username and Password to the /KhaozAlwaysRunning/KhaozAlwaysRunning.Communications/SecretData.cs
   - Add the PushJet Secret that will be used to send PUSH notifications to the /KhaozAlwaysRunning/KhaozAlwaysRunning.Communications/SecretData.cs
 
