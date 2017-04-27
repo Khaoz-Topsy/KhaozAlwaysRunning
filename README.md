@@ -9,7 +9,8 @@ An application that checks the CPU Usage and Battery status
   - A PushJet Service (need the "secret")
 
 #####Install
-  - Add the Email address that will receive the emails and the Gmail account's Username and Password to the /KhaozAlwaysrunning/SMTPMail.cs
+  - Add the Email address that will receive the emails and the Gmail account's Username and Password to the /KhaozAlwaysRunning/KhaozAlwaysRunning.Communications/SecretData.cs
+  - Add the PushJet Secret that will be used to send PUSH notifications to the /KhaozAlwaysRunning/KhaozAlwaysRunning.Communications/SecretData.cs
 
 
 
