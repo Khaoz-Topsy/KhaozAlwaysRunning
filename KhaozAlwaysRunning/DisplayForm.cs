@@ -121,6 +121,7 @@ namespace KhaozAlwaysRunningForm
                 LblHeading.Font = new Font(modernFont.Families[0], 18);
                 LblBattey.Font = new Font(modernFont.Families[0], 14);
                 LblCPU.Font = new Font(modernFont.Families[0], 14);
+                LblPlex.Font = new Font(modernFont.Families[0], 14);
             }
         }
 
@@ -145,6 +146,15 @@ namespace KhaozAlwaysRunningForm
 
         private void KillPlex()
         {
+            PushJetCommands comm = new PushJetCommands();
+            comm.SendMessage(new PushJetMessageContent()
+            {
+                secret = SecretData.PushJetSecret,
+                message = "Plex Processes being shutdown" + "\n" + DateTime.Now.ToString(),
+                title = "Khaoz Home",
+                level = 3
+            });
+
             foreach (var process in Process.GetProcessesByName("PlexScriptHost"))
             {
                 process.Kill();
