@@ -9,7 +9,7 @@ namespace KhaozAlwaysRunning.Communications
     public static class SecretData
     {
         public static string PushJetSecret = "";
-        public static string Address = "";
+        public static string SenderEmailAddress = "";
         public static string EmailAddress = "";
         public static string Password = "";
     }

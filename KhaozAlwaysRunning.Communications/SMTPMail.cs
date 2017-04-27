@@ -18,7 +18,7 @@ namespace KhaozAlwaysRunning.Communications
                 Thread.CurrentThread.IsBackground = true;
 
                 string Email = SecretData.EmailAddress;
-                string Address = SecretData.Address;
+                string SenderEmail = SecretData.SenderEmailAddress;
                 string Password = SecretData.Password;
 
                 var smtp = new SmtpClient
@@ -28,10 +28,10 @@ namespace KhaozAlwaysRunning.Communications
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(Address, Password)
+                    Credentials = new NetworkCredential(SenderEmail, Password)
                 };
 
-                using (var message = new MailMessage(Address, Email) { Subject = Subject, Body = Message })
+                using (var message = new MailMessage(SenderEmail, Email) { Subject = Subject, Body = Message })
                 {
                     smtp.Send(message);
                 }
