@@ -118,22 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Steam6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\Steam6.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PowerFalse" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\PowerFalse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PowerTrue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\PowerTrue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="scary" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\scary.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CPU" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\CPU.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Steam6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Steam6.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PowerTrue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\PowerTrue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DengXian" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DengXian.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="scary" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\scary.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PowerFalse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\PowerFalse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ToggleTrue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ToggleTrue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ToggleFalse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ToggleFalse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

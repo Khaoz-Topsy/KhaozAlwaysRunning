@@ -32,11 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayForm));
             this.TmrInterval = new System.Windows.Forms.Timer(this.components);
             this.LblBattey = new System.Windows.Forms.Label();
-            this.ImgCPU = new System.Windows.Forms.PictureBox();
-            this.ImgBattery = new System.Windows.Forms.PictureBox();
             this.LblCPU = new System.Windows.Forms.Label();
             this.LblHeading = new System.Windows.Forms.Label();
             this.BtnClick = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.PBoxPlexProt = new System.Windows.Forms.PictureBox();
+            this.ImgCPU = new System.Windows.Forms.PictureBox();
+            this.ImgBattery = new System.Windows.Forms.PictureBox();
+            this.LblPlex = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.PBoxPlexProt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgBattery)).BeginInit();
             this.SuspendLayout();
@@ -55,28 +59,6 @@
             this.LblBattey.Size = new System.Drawing.Size(129, 23);
             this.LblBattey.TabIndex = 4;
             this.LblBattey.Text = "Battery Power";
-            // 
-            // ImgCPU
-            // 
-            this.ImgCPU.Image = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
-            this.ImgCPU.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
-            this.ImgCPU.Location = new System.Drawing.Point(3, 106);
-            this.ImgCPU.Name = "ImgCPU";
-            this.ImgCPU.Size = new System.Drawing.Size(60, 60);
-            this.ImgCPU.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ImgCPU.TabIndex = 5;
-            this.ImgCPU.TabStop = false;
-            // 
-            // ImgBattery
-            // 
-            this.ImgBattery.Image = global::KhaozAlwaysRunningForm.Properties.Resources.PowerTrue;
-            this.ImgBattery.InitialImage = ((System.Drawing.Image)(resources.GetObject("ImgBattery.InitialImage")));
-            this.ImgBattery.Location = new System.Drawing.Point(0, 42);
-            this.ImgBattery.Name = "ImgBattery";
-            this.ImgBattery.Size = new System.Drawing.Size(64, 64);
-            this.ImgBattery.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ImgBattery.TabIndex = 2;
-            this.ImgBattery.TabStop = false;
             // 
             // LblCPU
             // 
@@ -100,7 +82,7 @@
             // 
             // BtnClick
             // 
-            this.BtnClick.Location = new System.Drawing.Point(99, 206);
+            this.BtnClick.Location = new System.Drawing.Point(197, 226);
             this.BtnClick.Name = "BtnClick";
             this.BtnClick.Size = new System.Drawing.Size(75, 23);
             this.BtnClick.TabIndex = 8;
@@ -108,12 +90,64 @@
             this.BtnClick.UseVisualStyleBackColor = true;
             this.BtnClick.Click += new System.EventHandler(this.BtnClick_Click);
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // PBoxPlexProt
+            // 
+            this.PBoxPlexProt.Image = global::KhaozAlwaysRunningForm.Properties.Resources.ToggleFalse;
+            this.PBoxPlexProt.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
+            this.PBoxPlexProt.Location = new System.Drawing.Point(3, 182);
+            this.PBoxPlexProt.Name = "PBoxPlexProt";
+            this.PBoxPlexProt.Size = new System.Drawing.Size(64, 28);
+            this.PBoxPlexProt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBoxPlexProt.TabIndex = 9;
+            this.PBoxPlexProt.TabStop = false;
+            this.PBoxPlexProt.Click += new System.EventHandler(this.PBoxPlexProt_Click);
+            // 
+            // ImgCPU
+            // 
+            this.ImgCPU.Image = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
+            this.ImgCPU.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
+            this.ImgCPU.Location = new System.Drawing.Point(3, 106);
+            this.ImgCPU.Name = "ImgCPU";
+            this.ImgCPU.Size = new System.Drawing.Size(60, 60);
+            this.ImgCPU.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ImgCPU.TabIndex = 5;
+            this.ImgCPU.TabStop = false;
+            // 
+            // ImgBattery
+            // 
+            this.ImgBattery.Image = global::KhaozAlwaysRunningForm.Properties.Resources.PowerTrue;
+            this.ImgBattery.InitialImage = ((System.Drawing.Image)(resources.GetObject("ImgBattery.InitialImage")));
+            this.ImgBattery.Location = new System.Drawing.Point(0, 42);
+            this.ImgBattery.Name = "ImgBattery";
+            this.ImgBattery.Size = new System.Drawing.Size(64, 64);
+            this.ImgBattery.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ImgBattery.TabIndex = 2;
+            this.ImgBattery.TabStop = false;
+            // 
+            // LblPlex
+            // 
+            this.LblPlex.AutoSize = true;
+            this.LblPlex.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPlex.Location = new System.Drawing.Point(73, 187);
+            this.LblPlex.Name = "LblPlex";
+            this.LblPlex.Size = new System.Drawing.Size(138, 23);
+            this.LblPlex.TabIndex = 10;
+            this.LblPlex.Text = "Plex Protection";
+            // 
             // DisplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.LblPlex);
+            this.Controls.Add(this.PBoxPlexProt);
             this.Controls.Add(this.BtnClick);
             this.Controls.Add(this.LblHeading);
             this.Controls.Add(this.LblCPU);
@@ -124,6 +158,7 @@
             this.Name = "DisplayForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Khaoz Always On";
+            ((System.ComponentModel.ISupportInitialize)(this.PBoxPlexProt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgCPU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgBattery)).EndInit();
             this.ResumeLayout(false);
@@ -139,6 +174,9 @@
         private System.Windows.Forms.Label LblCPU;
         private System.Windows.Forms.Label LblHeading;
         private System.Windows.Forms.Button BtnClick;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.PictureBox PBoxPlexProt;
+        private System.Windows.Forms.Label LblPlex;
     }
 }
 

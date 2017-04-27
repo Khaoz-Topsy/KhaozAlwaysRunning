@@ -28,6 +28,8 @@ namespace KhaozAlwaysRunningForm
         private static double CpuUsage = 0;
         private static int CPUAVG = 0;
 
+        private bool PlexProtection;
+
         public DisplayForm()
         {
             InitializeComponent();
@@ -87,11 +89,10 @@ namespace KhaozAlwaysRunningForm
                 CPUAVG = Convert.ToInt32((CpuUsage + CPUAVG) / 2);
                 if(CPUAVG > 90)
                 {
-                    //LblCPU.Text += " # " + CpuUsage;
-                    SMTPMail.Send(
-                        "CPU Usage at: " + CpuUsage + " on " + System.Environment.MachineName.ToString(),
-                        "CPU Usage at: " + CpuUsage + " on " + System.Environment.MachineName.ToString() + "\n" +
-                        DateTime.Now.ToString());
+                    if(PlexProtection)
+                    {
+                        KillPlex();
+                    }
                 }
                 #endregion
             }
@@ -140,6 +141,23 @@ namespace KhaozAlwaysRunningForm
             //    title = "Khaoz Home",
             //    level = 3
             //});
+        }
+
+        private void KillPlex()
+        {
+            foreach (var process in Process.GetProcessesByName("PlexScriptHost"))
+            {
+                process.Kill();
+            }
+        }
+
+        private void PBoxPlexProt_Click(object sender, EventArgs e)
+        {
+            PlexProtection = !PlexProtection;
+            if (PlexProtection)
+                PBoxPlexProt.Image = Properties.Resources.ToggleTrue;
+            else
+                PBoxPlexProt.Image = Properties.Resources.ToggleFalse;
         }
     }
 }

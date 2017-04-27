@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -89,6 +90,8 @@
     <Content Include="Images\PowerFalse.png" />
     <Content Include="Images\PowerTrue.png" />
     <Content Include="Images\Steam6.gif" />
+    <None Include="Images\ToggleFalse.png" />
+    <None Include="Images\ToggleTrue.png" />
     <Content Include="KhaozLogo.ico" />
     <None Include="Resources\DengXian.ttf" />
   </ItemGroup>
