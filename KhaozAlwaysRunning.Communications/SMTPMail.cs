@@ -15,26 +15,30 @@ namespace KhaozAlwaysRunning.Communications
         {
             new Thread(() =>
             {
-                Thread.CurrentThread.IsBackground = true;
-
-                string Email = SecretData.EmailAddress;
-                string SenderEmail = SecretData.SenderEmailAddress;
-                string Password = SecretData.Password;
-
-                var smtp = new SmtpClient
+                try
                 {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(SenderEmail, Password)
-                };
+                    Thread.CurrentThread.IsBackground = true;
 
-                using (var message = new MailMessage(SenderEmail, Email) { Subject = Subject, Body = Message })
-                {
-                    smtp.Send(message);
+                    string Email = SecretData.EmailAddress;
+                    string SenderEmail = SecretData.SenderEmailAddress;
+                    string Password = SecretData.Password;
+
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(SenderEmail, Password)
+                    };
+
+                    using (var message = new MailMessage(SenderEmail, Email) { Subject = Subject, Body = Message })
+                    {
+                        smtp.Send(message);
+                    }
                 }
+                catch (Exception) { }
 
             }).Start();
         }

@@ -14,24 +14,28 @@ namespace KhaozAlwaysRunning.Communications
         {
             await Task.Run(() =>
             {
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://api.pushjet.io/message");
+                try
+                {
+                    var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://api.pushjet.io/message");
 
-                //place body here
-                string stringData =
-                    "secret=" + messageData.secret + "&" +
-                    "message=" + messageData.message + "&" +
-                    "title=" + messageData.title + "&" +
-                    "level=" + messageData.level + "&" +
-                    "link=" + messageData.link;
-                var data = Encoding.ASCII.GetBytes(stringData);
+                    //place body here
+                    string stringData =
+                        "secret=" + messageData.secret + "&" +
+                        "message=" + messageData.message + "&" +
+                        "title=" + messageData.title + "&" +
+                        "level=" + messageData.level + "&" +
+                        "link=" + messageData.link;
+                    var data = Encoding.ASCII.GetBytes(stringData);
 
-                httpWebRequest.Method = "POST";
-                httpWebRequest.ContentType = "application/x-www-form-urlencoded";
-                httpWebRequest.ContentLength = data.Length;
+                    httpWebRequest.Method = "POST";
+                    httpWebRequest.ContentType = "application/x-www-form-urlencoded";
+                    httpWebRequest.ContentLength = data.Length;
 
-                Stream newStream = httpWebRequest.GetRequestStream();
-                newStream.Write(data, 0, data.Length);
-                newStream.Close();
+                    Stream newStream = httpWebRequest.GetRequestStream();
+                    newStream.Write(data, 0, data.Length);
+                    newStream.Close();
+                }
+                catch (Exception) { }
             });            
         }
     }
