@@ -40,9 +40,12 @@
             this.PBoxPlexProt = new System.Windows.Forms.PictureBox();
             this.ImgCPU = new System.Windows.Forms.PictureBox();
             this.ImgBattery = new System.Windows.Forms.PictureBox();
+            this.LblBattNotify = new System.Windows.Forms.Label();
+            this.PBoxBatteryNotify = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PBoxPlexProt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgBattery)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBoxBatteryNotify)).BeginInit();
             this.SuspendLayout();
             // 
             // TmrInterval
@@ -100,7 +103,7 @@
             // 
             this.LblPlex.AutoSize = true;
             this.LblPlex.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPlex.Location = new System.Drawing.Point(67, 182);
+            this.LblPlex.Location = new System.Drawing.Point(67, 218);
             this.LblPlex.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.LblPlex.Name = "LblPlex";
             this.LblPlex.Size = new System.Drawing.Size(138, 23);
@@ -111,7 +114,7 @@
             // 
             this.PBoxPlexProt.Image = ((System.Drawing.Image)(resources.GetObject("PBoxPlexProt.Image")));
             this.PBoxPlexProt.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
-            this.PBoxPlexProt.Location = new System.Drawing.Point(3, 180);
+            this.PBoxPlexProt.Location = new System.Drawing.Point(3, 216);
             this.PBoxPlexProt.Name = "PBoxPlexProt";
             this.PBoxPlexProt.Size = new System.Drawing.Size(61, 25);
             this.PBoxPlexProt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -141,12 +144,37 @@
             this.ImgBattery.TabIndex = 2;
             this.ImgBattery.TabStop = false;
             // 
+            // LblBattNotify
+            // 
+            this.LblBattNotify.AutoSize = true;
+            this.LblBattNotify.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblBattNotify.Location = new System.Drawing.Point(67, 182);
+            this.LblBattNotify.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
+            this.LblBattNotify.Name = "LblBattNotify";
+            this.LblBattNotify.Size = new System.Drawing.Size(174, 23);
+            this.LblBattNotify.TabIndex = 12;
+            this.LblBattNotify.Text = "Battery Notification";
+            // 
+            // PBoxBatteryNotify
+            // 
+            this.PBoxBatteryNotify.Image = ((System.Drawing.Image)(resources.GetObject("PBoxBatteryNotify.Image")));
+            this.PBoxBatteryNotify.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
+            this.PBoxBatteryNotify.Location = new System.Drawing.Point(3, 180);
+            this.PBoxBatteryNotify.Name = "PBoxBatteryNotify";
+            this.PBoxBatteryNotify.Size = new System.Drawing.Size(61, 25);
+            this.PBoxBatteryNotify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBoxBatteryNotify.TabIndex = 11;
+            this.PBoxBatteryNotify.TabStop = false;
+            this.PBoxBatteryNotify.Click += new System.EventHandler(this.PBoxBatteryNotify_Click);
+            // 
             // DisplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.LblBattNotify);
+            this.Controls.Add(this.PBoxBatteryNotify);
             this.Controls.Add(this.LblPlex);
             this.Controls.Add(this.PBoxPlexProt);
             this.Controls.Add(this.BtnClick);
@@ -162,6 +190,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PBoxPlexProt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgCPU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgBattery)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBoxBatteryNotify)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,6 +207,8 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox PBoxPlexProt;
         private System.Windows.Forms.Label LblPlex;
+        private System.Windows.Forms.Label LblBattNotify;
+        private System.Windows.Forms.PictureBox PBoxBatteryNotify;
     }
 }
 

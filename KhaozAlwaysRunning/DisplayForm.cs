@@ -29,6 +29,7 @@ namespace KhaozAlwaysRunningForm
         private static int CPUAVG = 0;
 
         private bool PlexProtection;
+        private bool BattNotify;
 
         public DisplayForm()
         {
@@ -67,7 +68,7 @@ namespace KhaozAlwaysRunningForm
                 #region Battery
                 if (System.Windows.Forms.SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Offline) //On Battery
                 {
-                    if (isBatteryPower == false)
+                    if ( (isBatteryPower == false) && (BattNotify) )
                     {
                         Communicate.sendNotification(isBatteryPower);
                         isBatteryPower = true;
@@ -76,7 +77,7 @@ namespace KhaozAlwaysRunningForm
                 }
                 else // Plugged In
                 {
-                    if (isBatteryPower == true)
+                    if ( (isBatteryPower == true) && (BattNotify) )
                     {
                         Communicate.sendNotification(isBatteryPower);
                         isBatteryPower = false;
@@ -168,6 +169,15 @@ namespace KhaozAlwaysRunningForm
                 PBoxPlexProt.Image = Properties.Resources.ToggleTrue;
             else
                 PBoxPlexProt.Image = Properties.Resources.ToggleFalse;
+        }
+
+        private void PBoxBatteryNotify_Click(object sender, EventArgs e)
+        {
+            BattNotify = !BattNotify;
+            if (BattNotify)
+                PBoxBatteryNotify.Image = Properties.Resources.BatteryToggleTrue;
+            else
+                PBoxBatteryNotify.Image = Properties.Resources.ToggleFalse;
         }
     }
 }

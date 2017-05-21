@@ -86,10 +86,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\BatteryToggleTrue.png" />
     <Content Include="Images\CPU.png" />
     <Content Include="Images\PowerFalse.png" />
     <Content Include="Images\PowerTrue.png" />
     <Content Include="Images\Steam6.gif" />
+    <None Include="Resources\BatteryToggleTrue.bmp" />
     <None Include="Images\ToggleFalse.png" />
     <None Include="Images\ToggleTrue.png" />
     <Content Include="KhaozLogo.ico" />
