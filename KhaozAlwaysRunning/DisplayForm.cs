@@ -123,6 +123,7 @@ namespace KhaozAlwaysRunningForm
                 LblBattey.Font = new Font(modernFont.Families[0], 14);
                 LblCPU.Font = new Font(modernFont.Families[0], 14);
                 LblPlex.Font = new Font(modernFont.Families[0], 14);
+                LblBattNotify.Font = new Font(modernFont.Families[0], 14);
             }
         }
 
