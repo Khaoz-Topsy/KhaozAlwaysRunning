@@ -26,7 +26,7 @@ namespace KhaozAlwaysRunningForm
 
         private static int Count = 0;
         private static double CpuUsage = 0;
-        private static int CPUAVG = 0;
+        private static int CPUOverLimitCount = 0;
 
         private bool PlexProtection;
         private bool BattNotify;
@@ -57,7 +57,7 @@ namespace KhaozAlwaysRunningForm
 
         private void Display()
         {
-            Count = Count < 3 ? Count + 1 : 0;
+            Count = (Count < 3) ? Count + 1 : 0;
 
             LblHeading.Text = Running[Count];
 
@@ -87,12 +87,18 @@ namespace KhaozAlwaysRunningForm
                 #endregion Battery
 
                 #region cpuAverage
-                CPUAVG = Convert.ToInt32((CpuUsage + CPUAVG) / 2);
-                if(CPUAVG > 90)
+                if (CpuUsage > 90)
+                {
+                    CPUOverLimitCount++;
+                    LblHighCPU.Text = string.Format("Count: {0}", CPUOverLimitCount);
+                }
+
+                if (CPUOverLimitCount > 10)
                 {
                     if(PlexProtection)
                     {
                         KillPlex();
+                        CPUOverLimitCount = 0;
                     }
                 }
                 #endregion
@@ -124,6 +130,7 @@ namespace KhaozAlwaysRunningForm
                 LblCPU.Font = new Font(modernFont.Families[0], 14);
                 LblPlex.Font = new Font(modernFont.Families[0], 14);
                 LblBattNotify.Font = new Font(modernFont.Families[0], 14);
+                LblHighCPU.Font = new Font(modernFont.Families[0], 8);
             }
         }
 

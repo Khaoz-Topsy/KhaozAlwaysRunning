@@ -42,6 +42,7 @@
             this.ImgBattery = new System.Windows.Forms.PictureBox();
             this.LblBattNotify = new System.Windows.Forms.Label();
             this.PBoxBatteryNotify = new System.Windows.Forms.PictureBox();
+            this.LblHighCPU = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PBoxPlexProt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgBattery)).BeginInit();
@@ -67,7 +68,7 @@
             // 
             this.LblCPU.AutoSize = true;
             this.LblCPU.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblCPU.Location = new System.Drawing.Point(67, 126);
+            this.LblCPU.Location = new System.Drawing.Point(67, 124);
             this.LblCPU.Name = "LblCPU";
             this.LblCPU.Size = new System.Drawing.Size(58, 23);
             this.LblCPU.TabIndex = 6;
@@ -167,12 +168,23 @@
             this.PBoxBatteryNotify.TabStop = false;
             this.PBoxBatteryNotify.Click += new System.EventHandler(this.PBoxBatteryNotify_Click);
             // 
+            // LblHighCPU
+            // 
+            this.LblHighCPU.AutoSize = true;
+            this.LblHighCPU.Font = new System.Drawing.Font("DengXian", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblHighCPU.Location = new System.Drawing.Point(68, 151);
+            this.LblHighCPU.Name = "LblHighCPU";
+            this.LblHighCPU.Size = new System.Drawing.Size(49, 14);
+            this.LblHighCPU.TabIndex = 13;
+            this.LblHighCPU.Text = "Count: 0";
+            // 
             // DisplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.LblHighCPU);
             this.Controls.Add(this.LblBattNotify);
             this.Controls.Add(this.PBoxBatteryNotify);
             this.Controls.Add(this.LblPlex);
@@ -209,6 +221,7 @@
         private System.Windows.Forms.Label LblPlex;
         private System.Windows.Forms.Label LblBattNotify;
         private System.Windows.Forms.PictureBox PBoxBatteryNotify;
+        private System.Windows.Forms.Label LblHighCPU;
     }
 }
 
