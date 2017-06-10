@@ -92,6 +92,11 @@ namespace KhaozAlwaysRunningForm
                     CPUOverLimitCount++;
                     LblHighCPU.Text = string.Format("Count: {0}", CPUOverLimitCount);
                 }
+                else if (CpuUsage < 40)
+                {
+                    CPUOverLimitCount = 0;
+                    LblHighCPU.Text = string.Format("Count: {0}", CPUOverLimitCount);
+                }
 
                 if (CPUOverLimitCount > 10)
                 {
@@ -99,6 +104,7 @@ namespace KhaozAlwaysRunningForm
                     {
                         KillPlex();
                         CPUOverLimitCount = 0;
+                        LblHighCPU.Text = string.Format("Count: {0}", CPUOverLimitCount);
                     }
                 }
                 #endregion
