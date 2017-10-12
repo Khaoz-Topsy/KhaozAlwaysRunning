@@ -8,10 +8,10 @@ namespace KhaozAlwaysRunning.Communications
 {
     public class Communicate
     {
-        public static void sendMail(bool hasPower)
+        public static void SendNotification(bool hasPower)
         {
-            string powerLost = "Power lost on " + System.Environment.MachineName.ToString();
-            string powerResume = "Power resumed " + System.Environment.MachineName.ToString();
+            string powerLost = "Power lost";
+            string powerResume = "Power resumed";
 
             string powerMessage;
 
@@ -20,29 +20,24 @@ namespace KhaozAlwaysRunning.Communications
             else
                 powerMessage = powerLost;
 
-            SMTPMail.Send(powerMessage, powerMessage + "\n" + DateTime.Now.ToString());
-        }
+            SlackRepository.SendToSlackChannel(Environment.GetEnvironmentVariable("COMPUTERNAME"), 
+                powerMessage, "http://khaoznet.xyz/", "#0000FF");
 
-        public static void sendNotification(bool hasPower)
+        }
+        public static void SendNotification(string ipAddress, int attempts, string lastResponseTime)
         {
-            string powerLost = "Power lost on " + System.Environment.MachineName.ToString() + "\n" + DateTime.Now.ToString();
-            string powerResume = "Power resumed " + System.Environment.MachineName.ToString() + "\n" + DateTime.Now.ToString();
+            SlackRepository.SendToSlackChannel(Environment.GetEnvironmentVariable("COMPUTERNAME"),
+                $"[{ipAddress}] has not responded after {attempts} attempts, \nLast Response took: {lastResponseTime}", 
+                "http://khaoznet.xyz/", "#00FF00");
 
-            string powerMessage;
-
-            if (hasPower)
-                powerMessage = powerResume;
-            else
-                powerMessage = powerLost;
-
-            PushJetCommands commands = new PushJetCommands();
-            commands.SendMessage(new PushJetMessageContent()
-            {
-                secret = SecretData.PushJetSecret,
-                message = powerMessage,
-                title = "Khaoz Home",
-                level = 3
-            });
         }
+
+        public static void SendNotification(string text)
+        {
+            SlackRepository.SendToSlackChannel(Environment.GetEnvironmentVariable("COMPUTERNAME"), 
+                text, "http://khaoznet.xyz/", "#FFA500");
+
+        }
+
     }
 }

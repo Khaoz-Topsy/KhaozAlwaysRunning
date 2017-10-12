@@ -145,4 +145,10 @@
   <data name="BatteryToggleTrue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\BatteryToggleTrue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Network" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Network.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NetworkToggleTrue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\NetworkToggleTrue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

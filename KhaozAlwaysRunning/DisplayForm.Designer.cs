@@ -36,17 +36,24 @@
             this.LblHeading = new System.Windows.Forms.Label();
             this.BtnClick = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.LblPlex = new System.Windows.Forms.Label();
-            this.PBoxPlexProt = new System.Windows.Forms.PictureBox();
+            this.LblCpuNotify = new System.Windows.Forms.Label();
+            this.LblBattNotify = new System.Windows.Forms.Label();
+            this.LblHighCPU = new System.Windows.Forms.Label();
+            this.LblPing = new System.Windows.Forms.Label();
+            this.LblPingCount = new System.Windows.Forms.Label();
+            this.LblPingNotify = new System.Windows.Forms.Label();
+            this.PBoxPingNotify = new System.Windows.Forms.PictureBox();
+            this.ImgNetwork = new System.Windows.Forms.PictureBox();
+            this.PBoxBatteryNotify = new System.Windows.Forms.PictureBox();
+            this.PBoxCpuNotify = new System.Windows.Forms.PictureBox();
             this.ImgCPU = new System.Windows.Forms.PictureBox();
             this.ImgBattery = new System.Windows.Forms.PictureBox();
-            this.LblBattNotify = new System.Windows.Forms.Label();
-            this.PBoxBatteryNotify = new System.Windows.Forms.PictureBox();
-            this.LblHighCPU = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.PBoxPlexProt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBoxPingNotify)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImgNetwork)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBoxBatteryNotify)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBoxCpuNotify)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgBattery)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBoxBatteryNotify)).BeginInit();
             this.SuspendLayout();
             // 
             // TmrInterval
@@ -68,7 +75,7 @@
             // 
             this.LblCPU.AutoSize = true;
             this.LblCPU.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblCPU.Location = new System.Drawing.Point(67, 124);
+            this.LblCPU.Location = new System.Drawing.Point(67, 121);
             this.LblCPU.Name = "LblCPU";
             this.LblCPU.Size = new System.Drawing.Size(58, 23);
             this.LblCPU.TabIndex = 6;
@@ -86,7 +93,7 @@
             // 
             // BtnClick
             // 
-            this.BtnClick.Location = new System.Drawing.Point(197, 226);
+            this.BtnClick.Location = new System.Drawing.Point(179, 305);
             this.BtnClick.Name = "BtnClick";
             this.BtnClick.Size = new System.Drawing.Size(75, 23);
             this.BtnClick.TabIndex = 8;
@@ -100,28 +107,115 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // LblPlex
+            // LblCpuNotify
             // 
-            this.LblPlex.AutoSize = true;
-            this.LblPlex.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPlex.Location = new System.Drawing.Point(67, 218);
-            this.LblPlex.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
-            this.LblPlex.Name = "LblPlex";
-            this.LblPlex.Size = new System.Drawing.Size(138, 23);
-            this.LblPlex.TabIndex = 10;
-            this.LblPlex.Text = "Plex Protection";
+            this.LblCpuNotify.AutoSize = true;
+            this.LblCpuNotify.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblCpuNotify.Location = new System.Drawing.Point(68, 304);
+            this.LblCpuNotify.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
+            this.LblCpuNotify.Name = "LblCpuNotify";
+            this.LblCpuNotify.Size = new System.Drawing.Size(152, 23);
+            this.LblCpuNotify.TabIndex = 10;
+            this.LblCpuNotify.Text = "CPU Notification";
             // 
-            // PBoxPlexProt
+            // LblBattNotify
             // 
-            this.PBoxPlexProt.Image = ((System.Drawing.Image)(resources.GetObject("PBoxPlexProt.Image")));
-            this.PBoxPlexProt.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
-            this.PBoxPlexProt.Location = new System.Drawing.Point(3, 216);
-            this.PBoxPlexProt.Name = "PBoxPlexProt";
-            this.PBoxPlexProt.Size = new System.Drawing.Size(61, 25);
-            this.PBoxPlexProt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PBoxPlexProt.TabIndex = 9;
-            this.PBoxPlexProt.TabStop = false;
-            this.PBoxPlexProt.Click += new System.EventHandler(this.PBoxPlexProt_Click);
+            this.LblBattNotify.AutoSize = true;
+            this.LblBattNotify.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblBattNotify.Location = new System.Drawing.Point(68, 243);
+            this.LblBattNotify.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
+            this.LblBattNotify.Name = "LblBattNotify";
+            this.LblBattNotify.Size = new System.Drawing.Size(174, 23);
+            this.LblBattNotify.TabIndex = 12;
+            this.LblBattNotify.Text = "Battery Notification";
+            // 
+            // LblHighCPU
+            // 
+            this.LblHighCPU.AutoSize = true;
+            this.LblHighCPU.Font = new System.Drawing.Font("DengXian", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblHighCPU.Location = new System.Drawing.Point(68, 148);
+            this.LblHighCPU.Name = "LblHighCPU";
+            this.LblHighCPU.Size = new System.Drawing.Size(49, 14);
+            this.LblHighCPU.TabIndex = 13;
+            this.LblHighCPU.Text = "Count: 0";
+            // 
+            // LblPing
+            // 
+            this.LblPing.AutoSize = true;
+            this.LblPing.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPing.Location = new System.Drawing.Point(67, 183);
+            this.LblPing.Name = "LblPing";
+            this.LblPing.Size = new System.Drawing.Size(59, 23);
+            this.LblPing.TabIndex = 15;
+            this.LblPing.Text = "Ping: ";
+            // 
+            // LblPingCount
+            // 
+            this.LblPingCount.AutoSize = true;
+            this.LblPingCount.Font = new System.Drawing.Font("DengXian", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPingCount.Location = new System.Drawing.Point(68, 206);
+            this.LblPingCount.Name = "LblPingCount";
+            this.LblPingCount.Size = new System.Drawing.Size(49, 14);
+            this.LblPingCount.TabIndex = 16;
+            this.LblPingCount.Text = "Count: 0";
+            // 
+            // LblPingNotify
+            // 
+            this.LblPingNotify.AutoSize = true;
+            this.LblPingNotify.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPingNotify.Location = new System.Drawing.Point(68, 274);
+            this.LblPingNotify.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
+            this.LblPingNotify.Name = "LblPingNotify";
+            this.LblPingNotify.Size = new System.Drawing.Size(153, 23);
+            this.LblPingNotify.TabIndex = 18;
+            this.LblPingNotify.Text = "Ping Notification";
+            // 
+            // PBoxPingNotify
+            // 
+            this.PBoxPingNotify.Image = ((System.Drawing.Image)(resources.GetObject("PBoxPingNotify.Image")));
+            this.PBoxPingNotify.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
+            this.PBoxPingNotify.Location = new System.Drawing.Point(4, 272);
+            this.PBoxPingNotify.Name = "PBoxPingNotify";
+            this.PBoxPingNotify.Size = new System.Drawing.Size(61, 25);
+            this.PBoxPingNotify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBoxPingNotify.TabIndex = 17;
+            this.PBoxPingNotify.TabStop = false;
+            this.PBoxPingNotify.Click += new System.EventHandler(this.PBoxPingNotify_Click);
+            // 
+            // ImgNetwork
+            // 
+            this.ImgNetwork.Image = global::KhaozAlwaysRunningForm.Properties.Resources.Network;
+            this.ImgNetwork.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
+            this.ImgNetwork.Location = new System.Drawing.Point(3, 166);
+            this.ImgNetwork.Name = "ImgNetwork";
+            this.ImgNetwork.Size = new System.Drawing.Size(61, 60);
+            this.ImgNetwork.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ImgNetwork.TabIndex = 14;
+            this.ImgNetwork.TabStop = false;
+            // 
+            // PBoxBatteryNotify
+            // 
+            this.PBoxBatteryNotify.Image = ((System.Drawing.Image)(resources.GetObject("PBoxBatteryNotify.Image")));
+            this.PBoxBatteryNotify.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
+            this.PBoxBatteryNotify.Location = new System.Drawing.Point(4, 241);
+            this.PBoxBatteryNotify.Name = "PBoxBatteryNotify";
+            this.PBoxBatteryNotify.Size = new System.Drawing.Size(61, 25);
+            this.PBoxBatteryNotify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBoxBatteryNotify.TabIndex = 11;
+            this.PBoxBatteryNotify.TabStop = false;
+            this.PBoxBatteryNotify.Click += new System.EventHandler(this.PBoxBatteryNotify_Click);
+            // 
+            // PBoxCpuNotify
+            // 
+            this.PBoxCpuNotify.Image = ((System.Drawing.Image)(resources.GetObject("PBoxCpuNotify.Image")));
+            this.PBoxCpuNotify.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
+            this.PBoxCpuNotify.Location = new System.Drawing.Point(3, 303);
+            this.PBoxCpuNotify.Name = "PBoxCpuNotify";
+            this.PBoxCpuNotify.Size = new System.Drawing.Size(61, 25);
+            this.PBoxCpuNotify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBoxCpuNotify.TabIndex = 9;
+            this.PBoxCpuNotify.TabStop = false;
+            this.PBoxCpuNotify.Click += new System.EventHandler(this.PBoxPlexProt_Click);
             // 
             // ImgCPU
             // 
@@ -145,50 +239,22 @@
             this.ImgBattery.TabIndex = 2;
             this.ImgBattery.TabStop = false;
             // 
-            // LblBattNotify
-            // 
-            this.LblBattNotify.AutoSize = true;
-            this.LblBattNotify.Font = new System.Drawing.Font("DengXian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblBattNotify.Location = new System.Drawing.Point(67, 182);
-            this.LblBattNotify.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
-            this.LblBattNotify.Name = "LblBattNotify";
-            this.LblBattNotify.Size = new System.Drawing.Size(174, 23);
-            this.LblBattNotify.TabIndex = 12;
-            this.LblBattNotify.Text = "Battery Notification";
-            // 
-            // PBoxBatteryNotify
-            // 
-            this.PBoxBatteryNotify.Image = ((System.Drawing.Image)(resources.GetObject("PBoxBatteryNotify.Image")));
-            this.PBoxBatteryNotify.InitialImage = global::KhaozAlwaysRunningForm.Properties.Resources.CPU;
-            this.PBoxBatteryNotify.Location = new System.Drawing.Point(3, 180);
-            this.PBoxBatteryNotify.Name = "PBoxBatteryNotify";
-            this.PBoxBatteryNotify.Size = new System.Drawing.Size(61, 25);
-            this.PBoxBatteryNotify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PBoxBatteryNotify.TabIndex = 11;
-            this.PBoxBatteryNotify.TabStop = false;
-            this.PBoxBatteryNotify.Click += new System.EventHandler(this.PBoxBatteryNotify_Click);
-            // 
-            // LblHighCPU
-            // 
-            this.LblHighCPU.AutoSize = true;
-            this.LblHighCPU.Font = new System.Drawing.Font("DengXian", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblHighCPU.Location = new System.Drawing.Point(68, 151);
-            this.LblHighCPU.Name = "LblHighCPU";
-            this.LblHighCPU.Size = new System.Drawing.Size(49, 14);
-            this.LblHighCPU.TabIndex = 13;
-            this.LblHighCPU.Text = "Count: 0";
-            // 
             // DisplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(241, 334);
+            this.Controls.Add(this.LblPingNotify);
+            this.Controls.Add(this.PBoxPingNotify);
+            this.Controls.Add(this.LblPingCount);
+            this.Controls.Add(this.LblPing);
+            this.Controls.Add(this.ImgNetwork);
             this.Controls.Add(this.LblHighCPU);
             this.Controls.Add(this.LblBattNotify);
             this.Controls.Add(this.PBoxBatteryNotify);
-            this.Controls.Add(this.LblPlex);
-            this.Controls.Add(this.PBoxPlexProt);
+            this.Controls.Add(this.LblCpuNotify);
+            this.Controls.Add(this.PBoxCpuNotify);
             this.Controls.Add(this.BtnClick);
             this.Controls.Add(this.LblHeading);
             this.Controls.Add(this.LblCPU);
@@ -199,10 +265,12 @@
             this.Name = "DisplayForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Khaoz Always On";
-            ((System.ComponentModel.ISupportInitialize)(this.PBoxPlexProt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBoxPingNotify)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImgNetwork)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBoxBatteryNotify)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBoxCpuNotify)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgCPU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgBattery)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PBoxBatteryNotify)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,11 +285,16 @@
         private System.Windows.Forms.Label LblHeading;
         private System.Windows.Forms.Button BtnClick;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.PictureBox PBoxPlexProt;
-        private System.Windows.Forms.Label LblPlex;
+        private System.Windows.Forms.PictureBox PBoxCpuNotify;
+        private System.Windows.Forms.Label LblCpuNotify;
         private System.Windows.Forms.Label LblBattNotify;
         private System.Windows.Forms.PictureBox PBoxBatteryNotify;
         private System.Windows.Forms.Label LblHighCPU;
+        private System.Windows.Forms.PictureBox ImgNetwork;
+        private System.Windows.Forms.Label LblPing;
+        private System.Windows.Forms.Label LblPingCount;
+        private System.Windows.Forms.Label LblPingNotify;
+        private System.Windows.Forms.PictureBox PBoxPingNotify;
     }
 }
 

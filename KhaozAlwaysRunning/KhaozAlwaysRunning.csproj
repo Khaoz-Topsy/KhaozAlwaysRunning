@@ -56,6 +56,8 @@
     <Compile Include="DisplayForm.Designer.cs">
       <DependentUpon>DisplayForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GetProcessCpuUsages.cs" />
+    <Compile Include="PingResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DisplayForm.resx">
@@ -88,6 +90,8 @@
   <ItemGroup>
     <None Include="Images\BatteryToggleTrue.png" />
     <Content Include="Images\CPU.png" />
+    <None Include="Images\Network.png" />
+    <None Include="Images\NetworkToggleTrue.png" />
     <Content Include="Images\PowerFalse.png" />
     <Content Include="Images\PowerTrue.png" />
     <Content Include="Images\Steam6.gif" />

@@ -1,49 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
-using System.Net.Mail;
-using System.Net;
-using System.Threading;
 using System.Drawing.Text;
 using System.IO;
 using KhaozAlwaysRunning.Communications;
+using System.Net.NetworkInformation;
 
 namespace KhaozAlwaysRunningForm
 {
     public partial class DisplayForm : Form
     {
-        private static string[] Running = new string[] { "Khaoz Always On.../", "Khaoz Always On...-", "Khaoz Always On...\\", "Khaoz Always On...|" };
-        private static bool isBatteryPower = false;
-        private static PerformanceCounter CPUCounter = new PerformanceCounter();
+        private static readonly string[] Running = { "Khaoz Always On.../", "Khaoz Always On...-", "Khaoz Always On...\\", "Khaoz Always On...|" };
+        private static bool _isBatteryPower;
+        private static readonly PerformanceCounter CpuCounter = new PerformanceCounter();
+        private static readonly ProcessCpuUsages ProcessCpuUsages = new ProcessCpuUsages();
 
-        private static int Count = 0;
-        private static double CpuUsage = 0;
-        private static int CPUOverLimitCount = 0;
+        private const string IpAddress = "192.168.0.2";
+        private static int _pingCount;
+        private static string _oldResponseTime; 
 
-        private bool PlexProtection;
-        private bool BattNotify;
+        private static int _count;
+        private static double _cpuUsage;
+        private static int _cpuOverLimitCount;
+
+        private bool _cpuNotify;
+        private bool _battNotify;
+        private bool _networkNotify;
 
         public DisplayForm()
         {
             InitializeComponent();
             InitCustomLabelFont();
 
-            CPUCounter.CategoryName = "Processor";
-            CPUCounter.CounterName = "% Processor Time";
-            CPUCounter.InstanceName = "_Total";
+            CpuCounter.CategoryName = "Processor";
+            CpuCounter.CounterName = "% Processor Time";
+            CpuCounter.InstanceName = "_Total";
 
-            CPUCounter.NextValue(); CPUCounter.NextValue();
+            CpuCounter.NextValue(); CpuCounter.NextValue();
 
             Display();
-            LblBattey.Text = "On Charge";
+            LblBattey.Text = @"On Charge";
+            LblPing.Text = @"Ping: ";
             //LblCPU.Text = "CPU: " + CPUUsageDisplay(CPUCounter.NextValue()) + " %";
             TmrInterval.Start();
 
@@ -57,75 +55,113 @@ namespace KhaozAlwaysRunningForm
 
         private void Display()
         {
-            Count = (Count < 3) ? Count + 1 : 0;
+            _count = (_count < 3) ? _count + 1 : 0;
 
-            LblHeading.Text = Running[Count];
+            LblHeading.Text = Running[_count];
 
-            CpuUsage = CPUCounter.NextValue();
+            _cpuUsage = CpuCounter.NextValue();
 
-            if (Count == 3)
+            if (_count != 3) return;
+
+            #region Battery
+            if (SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Offline) //On Battery
             {
-                #region Battery
-                if (System.Windows.Forms.SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Offline) //On Battery
+                if ((_isBatteryPower == false) && (_battNotify))
                 {
-                    if ( (isBatteryPower == false) && (BattNotify) )
-                    {
-                        Communicate.sendNotification(isBatteryPower);
-                        isBatteryPower = true;
-                    }
-                    LblBattey.Text = "On Battery";
+                    Communicate.SendNotification(_isBatteryPower);
+                    _isBatteryPower = true;
                 }
-                else // Plugged In
+                LblBattey.Text = @"On Battery";
+            }
+            else // Plugged In
+            {
+                if (_isBatteryPower && _battNotify)
                 {
-                    if ( (isBatteryPower == true) && (BattNotify) )
-                    {
-                        Communicate.sendNotification(isBatteryPower);
-                        isBatteryPower = false;
-                    }
-                    LblBattey.Text = "On Charge";
+                    Communicate.SendNotification(_isBatteryPower);
+                    _isBatteryPower = false;
                 }
-                #endregion Battery
+                LblBattey.Text = @"On Charge";
+            }
+            #endregion Battery
 
-                #region cpuAverage
-                if (CpuUsage > 90)
+            #region cpuAverage
+            if (_cpuUsage > 75)
+            {
+                if (_cpuNotify)
                 {
-                    CPUOverLimitCount++;
-                    LblHighCPU.Text = string.Format("Count: {0}", CPUOverLimitCount);
+                    _cpuOverLimitCount++;
                 }
-                else if (CpuUsage < 40)
-                {
-                    CPUOverLimitCount = 0;
-                    LblHighCPU.Text = string.Format("Count: {0}", CPUOverLimitCount);
-                }
-
-                if (CPUOverLimitCount > 10)
-                {
-                    if(PlexProtection)
-                    {
-                        KillPlex();
-                        CPUOverLimitCount = 0;
-                        LblHighCPU.Text = string.Format("Count: {0}", CPUOverLimitCount);
-                    }
-                }
-                #endregion
+            }
+            else if (_cpuUsage < 20)
+            {
+                _cpuOverLimitCount = 0;
             }
 
-            LblCPU.Text = "CPU: " + CPUUsageDisplay(CpuUsage) + " %";
+            if (_cpuOverLimitCount > 9)
+            {
+                if (_cpuNotify)
+                {
+                    KillPlex();
+                    _cpuOverLimitCount = 0;
+                }
+            }
+
+            LblHighCPU.Text = $@"Count: {_cpuOverLimitCount}";
+            LblCPU.Text = $@"CPU: {CpuUsageDisplay(_cpuUsage)} %";
+            #endregion
+
+            #region Network
+            if(_networkNotify)
+            {
+                PingHost(IpAddress, delegate (PingResult ping)
+                {
+                    if (ping.Success)
+                    {
+                        _pingCount = 0;
+                        _oldResponseTime = PingTimeDisplay(ping.RoundtripTime);
+                        LblPing.Text = _oldResponseTime;
+                    }
+                    else
+                    {
+                        _pingCount++;
+                    }
+
+                    if (_pingCount <= 9) return;
+                    if (_networkNotify)
+                    {
+                        Communicate.SendNotification(IpAddress, _pingCount, _oldResponseTime);
+                    }
+                });
+            }
+
+            LblPingCount.Text = $@"Count: {_pingCount}";
+            #endregion
         }
 
-        private string CPUUsageDisplay(double CPU)
+        private static string CpuUsageDisplay(double cpu)
         {
-            string temp = CPU.ToString("00.00");
-            
-            if (temp.Substring(0, 1).Equals("0"))
-                return " " + temp.Substring(1);
-            else
-                return temp;
+            string temp = cpu.ToString("00.00");
+
+            return temp.Substring(0, 1).Equals("0") ? " " + temp.Substring(1) : temp;
+        }
+
+        private static string PingTimeDisplay(long time)
+        {
+            string number = time.ToString();
+            string measurement = "ms";
+
+            if (time > 1000)
+            {
+                number = (time / 1000).ToString();
+                measurement = "s";
+            }
+
+            return $"Ping: {number}{measurement}";
         }
 
         private void InitCustomLabelFont()
         {
-            if(File.Exists("DengXian.ttf"))
+            if (File.Exists("DengXian.ttf"))
             {
                 PrivateFontCollection modernFont = new PrivateFontCollection();
 
@@ -134,64 +170,79 @@ namespace KhaozAlwaysRunningForm
                 LblHeading.Font = new Font(modernFont.Families[0], 18);
                 LblBattey.Font = new Font(modernFont.Families[0], 14);
                 LblCPU.Font = new Font(modernFont.Families[0], 14);
-                LblPlex.Font = new Font(modernFont.Families[0], 14);
+                LblCpuNotify.Font = new Font(modernFont.Families[0], 14);
                 LblBattNotify.Font = new Font(modernFont.Families[0], 14);
                 LblHighCPU.Font = new Font(modernFont.Families[0], 8);
+                LblPing.Font = new Font(modernFont.Families[0], 14);
+                LblPingCount.Font = new Font(modernFont.Families[0], 8);
+                LblPingNotify.Font = new Font(modernFont.Families[0], 14);
             }
         }
 
         private void BtnClick_Click(object sender, EventArgs e)
         {
-            //foreach (var process in Process.GetProcessesByName("PlexScriptHost"))
-            //{
-            //    process.Kill();
-            //}
 
-            //SMTPMail.Send("topsykretness@gmail.com", "This is the subject1 - " + System.Environment.MachineName.ToString(), "This is the message1");
-
-            //PushJetCommands commands = new PushJetCommands();
-            //commands.SendMessage(new PushJetMessageContent()
-            //{
-            //    secret = "d832e1527b368d29f290994db9456217",
-            //    message = "Notification Test",
-            //    title = "Khaoz Home",
-            //    level = 3
-            //});
         }
 
-        private void KillPlex()
+        private static void KillPlex()
         {
-            PushJetCommands comm = new PushJetCommands();
-            comm.SendMessage(new PushJetMessageContent()
-            {
-                secret = SecretData.PushJetSecret,
-                message = "Plex Processes being shutdown" + "\n" + DateTime.Now.ToString(),
-                title = "Khaoz Home",
-                level = 3
-            });
+            string processes = string.Empty;
 
-            foreach (var process in Process.GetProcessesByName("PlexScriptHost"))
+            ProcessCpuUsages.Get().ForEach(d => 
+                processes += $"\n{d.Value:00.00}% - {d.Key}"
+            );
+            Communicate.SendNotification($"CPU Usage is high\n\n{processes}");
+
+            foreach (Process process in Process.GetProcessesByName("PlexScriptHost"))
+            {
+                process.Kill();
+            }
+            foreach (Process process in Process.GetProcessesByName("python"))
             {
                 process.Kill();
             }
         }
 
+        private static void PingHost(string nameOrAddress, Action<PingResult> complete)
+        {
+            PingResult pingable = new PingResult() { Success = false, RoundtripTime = 0 };
+            Ping pinger = new Ping();
+            try
+            {
+                PingReply reply = pinger.Send(nameOrAddress);
+                if (reply != null)
+                {
+                    pingable.Success = reply.Status == IPStatus.Success;
+                    pingable.RoundtripTime = reply.RoundtripTime;
+                }
+            }
+            catch (PingException)
+            {
+                // Discard PingExceptions and return false;
+            }
+
+            complete(pingable);
+        }
+
         private void PBoxPlexProt_Click(object sender, EventArgs e)
         {
-            PlexProtection = !PlexProtection;
-            if (PlexProtection)
-                PBoxPlexProt.Image = Properties.Resources.ToggleTrue;
-            else
-                PBoxPlexProt.Image = Properties.Resources.ToggleFalse;
+            _cpuNotify = !_cpuNotify;
+            PBoxCpuNotify.Image = _cpuNotify ? 
+                Properties.Resources.ToggleTrue : Properties.Resources.ToggleFalse;
         }
 
         private void PBoxBatteryNotify_Click(object sender, EventArgs e)
         {
-            BattNotify = !BattNotify;
-            if (BattNotify)
-                PBoxBatteryNotify.Image = Properties.Resources.BatteryToggleTrue;
-            else
-                PBoxBatteryNotify.Image = Properties.Resources.ToggleFalse;
+            _battNotify = !_battNotify;
+            PBoxBatteryNotify.Image = _battNotify ? 
+                Properties.Resources.BatteryToggleTrue : Properties.Resources.ToggleFalse;
+        }
+
+        private void PBoxPingNotify_Click(object sender, EventArgs e)
+        {
+            _networkNotify = !_networkNotify;
+            PBoxPingNotify.Image = _networkNotify ? 
+                Properties.Resources.NetworkToggleTrue : Properties.Resources.ToggleFalse;
         }
     }
 }
