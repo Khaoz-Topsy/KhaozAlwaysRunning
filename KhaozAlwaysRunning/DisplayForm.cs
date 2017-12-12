@@ -18,6 +18,7 @@ namespace KhaozAlwaysRunningForm
 
         private const string IpAddress = "192.168.0.2";
         private static int _pingCount;
+        private static bool _pingIsAlive;
         private static string _oldResponseTime; 
 
         private static int _count;
@@ -118,6 +119,7 @@ namespace KhaozAlwaysRunningForm
                     if (ping.Success)
                     {
                         _pingCount = 0;
+                        _pingIsAlive = true;
                         _oldResponseTime = PingTimeDisplay(ping.RoundtripTime);
                         LblPing.Text = _oldResponseTime;
                     }
@@ -127,10 +129,10 @@ namespace KhaozAlwaysRunningForm
                     }
 
                     if (_pingCount <= 9) return;
-                    if (_networkNotify)
-                    {
-                        Communicate.SendNotification(IpAddress, _pingCount, _oldResponseTime);
-                    }
+                    if (!_pingIsAlive) return;
+
+                    _pingIsAlive = false;
+                    Communicate.SendNotification(IpAddress, _pingCount, _oldResponseTime);
                 });
             }
 
